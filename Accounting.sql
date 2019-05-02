@@ -23,17 +23,26 @@ CREATE TABLE `customer` (
   `Customer_id` int(11) NOT NULL,
   `Customer_name` varchar(30) DEFAULT NULL,
   `Customer_address` varchar(50) DEFAULT NULL,
-  `Customer_phone` int(11) DEFAULT NULL,
+  `Customer_phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`Customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `customer` */
 
-/*Table structure for table `detail pembayaran` */
+/*Table structure for table `detail_pembayaran` */
 
+DROP TABLE IF EXISTS `detail_pembayaran`;
 
+CREATE TABLE `detail_pembayaran` (
+  `Transaksi_id` int(11) DEFAULT NULL,
+  `Menu_id` int(11) DEFAULT NULL,
+  KEY `Transaksi_id` (`Transaksi_id`),
+  KEY `Menu_id` (`Menu_id`),
+  CONSTRAINT `detail_pembayaran_ibfk_1` FOREIGN KEY (`Transaksi_id`) REFERENCES `transaksi` (`Transaksi_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `detail_pembayaran_ibfk_2` FOREIGN KEY (`Menu_id`) REFERENCES `menu` (`Menu_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `detail pembayaran` */
+/*Data for the table `detail_pembayaran` */
 
 /*Table structure for table `menu` */
 
@@ -59,6 +68,7 @@ CREATE TABLE `restaurant` (
   `Restaurant_id` int(11) NOT NULL AUTO_INCREMENT,
   `Restaurant_name` varchar(20) DEFAULT NULL,
   `Restaurant_address` varchar(40) DEFAULT NULL,
+  `Restaurant_phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`Restaurant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -83,17 +93,6 @@ CREATE TABLE `transaksi` (
   CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`Customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-DROP TABLE IF EXISTS `detail pembayaran`;
-
-CREATE TABLE `detail pembayaran` (
-  `Transaksi_id` int(11) DEFAULT NULL,
-  `Menu_id` int(11) DEFAULT NULL,
-  KEY `Transaksi_id` (`Transaksi_id`),
-  KEY `Menu_id` (`Menu_id`),
-  CONSTRAINT `detail pembayaran_ibfk_1` FOREIGN KEY (`Transaksi_id`) REFERENCES `transaksi` (`Transaksi_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `detail pembayaran_ibfk_2` FOREIGN KEY (`Menu_id`) REFERENCES `menu` (`Menu_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*Data for the table `transaksi` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
