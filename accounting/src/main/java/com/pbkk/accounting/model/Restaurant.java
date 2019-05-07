@@ -1,8 +1,24 @@
 package com.pbkk.accounting.model;
 
-public class Restaurant {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "restaurant")
+public class Restaurant extends AuditModel{
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int restaurant_id;
+	@NotNull
+    @Size(max = 100)
 	private String restaurant_name;
+	@NotNull
+    @Size(max = 100)
 	private String restaurant_address;
 	
 	public int getRestaurant_id() {
