@@ -43,64 +43,7 @@ public class ReceiptController {
 	@Autowired
     private MenuRepository menuRepository;
 	
-	@ResponseBody
-	@RequestMapping("")
-	public ArrayList<Map<String,Object> > getAllReceipts() {
-		
-		ArrayList<Map<String,Object> > listReceipts = new ArrayList<Map<String,Object> >();
-		List<Transaksi> listTransaksi = transaksiRepository.findAll();
-		Iterator iterators = listTransaksi.iterator();
-		
-		while(iterators.hasNext()) {
-			
-			Transaksi transaksi = (Transaksi) iterators.next();
-			
-			Map<String, Object> map = new LinkedHashMap<>();
-			Restaurant restaurant = transaksi.getRestaurant();
-			Customer customer = transaksi.getCustomer();
-			
-			Time time = transaksi.getTime();
-			Date date = transaksi.getDate();
-			String restaurant_name = restaurant.getRestaurant_name();
-			String customer_name = customer.getCustomer_name();
-			Long id_transaksi = transaksi.getTransaksi_id();
-			String customer_address = customer.getCustomer_address();
-			List<DetailPembayaran> listDetailPembayaran = detailPembayaranRepository.findByTransaksiId(id_transaksi);
-			ArrayList<Map<String,Object> > listNamaHarga = new ArrayList<Map<String,Object> >();
-			String jenis_pembayaran = transaksi.getJenis_pembayaran();
-			
-			Iterator iterator = listDetailPembayaran.iterator();
-			
-			while(iterator.hasNext()) {
-				DetailPembayaran detail=(DetailPembayaran) iterator.next();
-				Long id_menu = detail.getMenuId();
-				Map<String, Object> mep = new LinkedHashMap<>();
-				Optional<Menu> optionalMenu = menuRepository.findById(id_menu);
-				Menu menu = optionalMenu.get();
-				mep.put("nama menu", menu.getMenu_name());
-				mep.put("harga menu",menu.getMenu_price());
-				listNamaHarga.add(mep);
-		    }
-			map.put("time",time);
-			map.put("date",date);
-			map.put("nama restoran",restaurant_name);
-			map.put("nama pelanggan",customer_name);
-			map.put("id transaksi",id_transaksi);
-			map.put("alamat_pelanggan",customer_address);
-			map.put("detail harga",listNamaHarga);
-			map.put("jenis pembayaran", jenis_pembayaran);
-			listReceipts.add(map);
-		}
-		return listReceipts;
-    }
-	
-	@ResponseBody
-	@RequestMapping("/{id}")
-	
-	public Map<String, Object> getReceipt(@PathVariable(value = "id")Long receiptId) {
-		Optional<Transaksi> optionalTransaksi = transaksiRepository.findById(receiptId);
-		Transaksi transaksi = optionalTransaksi.get();
-		
+	public Map<String,Object> getReceipt(Transaksi transaksi) {
 		Map<String, Object> map = new LinkedHashMap<>();
 		Restaurant restaurant = transaksi.getRestaurant();
 		Customer customer = transaksi.getCustomer();
@@ -127,7 +70,6 @@ public class ReceiptController {
 			mep.put("harga menu",menu.getMenu_price());
 			listNamaHarga.add(mep);
 	    }
-		
 		map.put("time",time);
 		map.put("date",date);
 		map.put("nama restoran",restaurant_name);
@@ -136,6 +78,36 @@ public class ReceiptController {
 		map.put("alamat_pelanggan",customer_address);
 		map.put("detail harga",listNamaHarga);
 		map.put("jenis pembayaran", jenis_pembayaran);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("")
+	public ArrayList<Map<String,Object> > getAllReceipts() {
+		
+		ArrayList<Map<String,Object> > listReceipts = new ArrayList<Map<String,Object> >();
+		List<Transaksi> listTransaksi = transaksiRepository.findAll();
+		Iterator iterators = listTransaksi.iterator();
+		
+		while(iterators.hasNext()) {
+			
+			Transaksi transaksi = (Transaksi) iterators.next();
+			
+			Map<String, Object> map = getReceipt(transaksi);
+			
+			listReceipts.add(map);
+		}
+		return listReceipts;
+    }
+	
+	@ResponseBody
+	@RequestMapping("/{id}")
+	
+	public Map<String, Object> getReceiptById(@PathVariable(value = "id")Long receiptId) {
+		Optional<Transaksi> optionalTransaksi = transaksiRepository.findById(receiptId);
+		Transaksi transaksi = optionalTransaksi.get();
+		
+		Map<String, Object> map = getReceipt(transaksi);
 		return map;
 	}
 }
