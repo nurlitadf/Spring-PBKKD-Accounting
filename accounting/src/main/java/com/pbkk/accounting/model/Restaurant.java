@@ -8,12 +8,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "restaurant")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Restaurant extends AuditModel{
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int restaurant_id;
+	private Long restaurant_id;
 	@NotNull
     @Size(max = 100)
 	private String restaurant_name;
@@ -21,10 +25,10 @@ public class Restaurant extends AuditModel{
     @Size(max = 100)
 	private String restaurant_address;
 	
-	public int getRestaurant_id() {
+	public Long getRestaurant_id() {
 		return restaurant_id;
 	}
-	public void setRestaurant_id(int restaurant_id) {
+	public void setRestaurant_id(Long restaurant_id) {
 		this.restaurant_id = restaurant_id;
 	}
 	public String getRestaurant_name() {

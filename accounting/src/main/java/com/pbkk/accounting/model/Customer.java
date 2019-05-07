@@ -4,14 +4,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "customer")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customer extends AuditModel {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int customer_id;
+	private Long customer_id;
 	@NotNull
     @Size(max = 100)
 	private String customer_name;
@@ -23,10 +24,10 @@ public class Customer extends AuditModel {
 	private String customer_phone;
 	
 	
-	public int getCustomer_id() {
+	public Long getCustomer_id() {
 		return customer_id;
 	}
-	public void setCustomer_id(int customer_id) {
+	public void setCustomer_id(Long customer_id) {
 		this.customer_id = customer_id;
 	}
 	public String getCustomer_name() {
