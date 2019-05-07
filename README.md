@@ -1,4 +1,4 @@
-#Accounting Microservice
+#Spring-PBKKD-Accounting
 
 Final Project Mata Kuliah Pemrograman Berbasis Kerangka Kerja 2019
 
