@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,7 +60,7 @@ public class ReceiptController {
 		String jenis_pembayaran = transaksi.getJenis_pembayaran();
 		
 		Iterator iterator = listDetailPembayaran.iterator();
-		
+		int total_cost=0;
 		while(iterator.hasNext()) {
 			DetailPembayaran detail=(DetailPembayaran) iterator.next();
 			Long id_menu = detail.getMenuId();
@@ -68,6 +69,7 @@ public class ReceiptController {
 			Menu menu = optionalMenu.get();
 			mep.put("nama menu", menu.getMenu_name());
 			mep.put("harga menu",menu.getMenu_price());
+			total_cost=total_cost+menu.getMenu_price();
 			listNamaHarga.add(mep);
 	    }
 		map.put("time",time);
@@ -75,8 +77,9 @@ public class ReceiptController {
 		map.put("nama restoran",restaurant_name);
 		map.put("nama pelanggan",customer_name);
 		map.put("id transaksi",id_transaksi);
-		map.put("alamat_pelanggan",customer_address);
+		map.put("alamat pelanggan",customer_address);
 		map.put("detail harga",listNamaHarga);
+		map.put("total harga",total_cost);
 		map.put("jenis pembayaran", jenis_pembayaran);
 		return map;
 	}
@@ -99,6 +102,21 @@ public class ReceiptController {
 		}
 		return listReceipts;
     }
+	public ArrayList<Map<String,Object> > getReceiptsByStatus(@RequestParam int status){
+		
+		ArrayList<Map<String,Object> > listReceipts = new ArrayList<Map<String,Object> >();
+		List<Transaksi> listTransaksi = transaksiRepository.findByTransaksiStatus(status);
+		Iterator iterators = listTransaksi.iterator();
+		while(iterators.hasNext()) {
+			
+			Transaksi transaksi = (Transaksi) iterators.next();
+			
+			Map<String, Object> map = getReceipt(transaksi);
+			
+			listReceipts.add(map);
+		}
+		return listReceipts;
+	}
 	
 	@ResponseBody
 	@RequestMapping("/{id}")

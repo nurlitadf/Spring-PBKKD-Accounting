@@ -28,7 +28,7 @@ public class Transaksi extends AuditModel{
 	
 	@NotNull
 	@Size(max = 20)
-	private String transaksi_status;
+	private String transaksiStatus;
 	
 	@NotNull
 	@Size(max = 20)
@@ -70,12 +70,12 @@ public class Transaksi extends AuditModel{
 		this.time = time;
 	}
 
-	public String getTransaksi_status() {
-		return transaksi_status;
+	public String getTransaksiStatus() {
+		return transaksiStatus;
 	}
 
-	public void setTransaksi_status(String transaksi_status) {
-		this.transaksi_status = transaksi_status;
+	public void setTransaksiStatus(String transaksiStatus) {
+		this.transaksiStatus = transaksiStatus;
 	}
 
 	public String getJenis_pembayaran() {
