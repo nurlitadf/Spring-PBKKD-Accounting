@@ -67,9 +67,9 @@ public class ReceiptController {
 			Map<String, Object> mep = new LinkedHashMap<>();
 			Optional<Menu> optionalMenu = menuRepository.findById(id_menu);
 			Menu menu = optionalMenu.get();
-			mep.put("nama menu", menu.getMenu_name());
-			mep.put("harga menu",menu.getMenu_price());
-			total_cost=total_cost+menu.getMenu_price();
+			mep.put("nama menu", menu.getMenuName());
+			mep.put("harga menu",menu.getMenuPrice());
+			total_cost=total_cost+menu.getMenuPrice();
 			listNamaHarga.add(mep);
 	    }
 		map.put("time",time);

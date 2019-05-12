@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pbkk.accounting.exception.ResourceNotFoundException;
 import com.pbkk.accounting.model.Customer;
-import com.pbkk.accounting.model.Transaksi;
 import com.pbkk.accounting.repository.CustomerRepository;
 
 @RestController

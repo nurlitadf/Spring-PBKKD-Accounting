@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customer extends AuditModel {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long customerId;
 	@NotNull
     @Size(max = 100)

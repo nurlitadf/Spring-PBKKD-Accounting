@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "transaksi")
 public class Transaksi extends AuditModel{
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long transaksi_id;
 	
 	@NotNull

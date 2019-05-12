@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Restaurant extends AuditModel{
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long restaurant_id;
 	@NotNull
     @Size(max = 100)
