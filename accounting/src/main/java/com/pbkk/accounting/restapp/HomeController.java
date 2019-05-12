@@ -20,11 +20,5 @@ import java.util.Map;
 @RestController
 @RequestMapping("/")
 public class HomeController {
-	@Autowired
-    private CustomerRepository customerRepository;
-	@ResponseBody
-	@RequestMapping("")
-	public Page<Customer> getAllPosts(Pageable pageable) {
-        return customerRepository.findAll(pageable);
-    }
+	
 }

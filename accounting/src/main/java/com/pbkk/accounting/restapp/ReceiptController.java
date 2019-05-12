@@ -52,9 +52,9 @@ public class ReceiptController {
 		Time time = transaksi.getTime();
 		Date date = transaksi.getDate();
 		String restaurant_name = restaurant.getRestaurant_name();
-		String customer_name = customer.getCustomer_name();
+		String customer_name = customer.getCustomerName();
 		Long id_transaksi = transaksi.getTransaksi_id();
-		String customer_address = customer.getCustomer_address();
+		String customer_address = customer.getCustomerAddress();
 		List<DetailPembayaran> listDetailPembayaran = detailPembayaranRepository.findByTransaksiId(id_transaksi);
 		ArrayList<Map<String,Object> > listNamaHarga = new ArrayList<Map<String,Object> >();
 		String jenis_pembayaran = transaksi.getJenis_pembayaran();
