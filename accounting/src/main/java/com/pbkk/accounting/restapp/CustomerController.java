@@ -30,7 +30,7 @@ public class CustomerController {
 	@Autowired
     private CustomerRepository customerRepository;
 	@ResponseBody
-	@RequestMapping("/")
+	@RequestMapping("")
 	public List<Customer> getCustomer(){
 		return customerRepository.findAll();
 	}

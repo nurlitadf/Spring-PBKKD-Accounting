@@ -26,7 +26,7 @@ public class MenuController {
 	@Autowired
 	private RestaurantRepository restaurantRepository;
 	@ResponseBody
-	@RequestMapping("/")
+	@RequestMapping("")
 	public List<Menu> getMenu(){
 		return menuRepository.findAll();
 	}
