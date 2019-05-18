@@ -4,9 +4,9 @@
 
 1. **Alvin Tanuwijaya (05111640000021)**
 
-2. **Nurlita Dhuha F.     (05111640000021)**
+2. **Nurlita Dhuha F.     (05111640000092)**
 
-3. **Chrisnady Anggara  (05111640000021)**
+3. **Chrisnady Anggara  (05111640000153)**
 
 ---
 
