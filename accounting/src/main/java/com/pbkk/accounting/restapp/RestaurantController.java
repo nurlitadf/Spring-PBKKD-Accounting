@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pbkk.accounting.exception.ResourceNotFoundException;
 import com.pbkk.accounting.model.Restaurant;
+import com.pbkk.accounting.model.Restaurants;
 import com.pbkk.accounting.repository.RestaurantRepository;
+import com.pbkk.accounting.service.SendAPI;
 
 @RestController
 @RequestMapping("/restaurant")
 public class RestaurantController {
 	@Autowired
 	private RestaurantRepository restaurantRepository;
+	@Autowired
+	SendAPI sendAPI;
 	@ResponseBody
 	@RequestMapping("")
 	public List<Restaurant> getRestaurant(){
@@ -28,9 +32,9 @@ public class RestaurantController {
 	}
 	@ResponseBody
 	@RequestMapping("/{id}")
-	public Restaurant getRestaurantById(@PathVariable(value = "id") Long id){
-		Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
-		return optionalRestaurant.get();
+	public Restaurants getRestaurantById(@PathVariable(value = "id") Long id){
+		String token=sendAPI.getToken();
+		return sendAPI.getRestaurantData(id,token);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/create", method = RequestMethod.POST)

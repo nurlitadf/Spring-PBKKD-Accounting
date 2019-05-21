@@ -16,7 +16,9 @@ public class DetailPembayaran extends AuditModel{
 	@NotNull
 	private Long transaksiId;
 	@NotNull
-	private Long menuId;
+	private String namaMenu;
+	private Long hargaMenu;
+	private Long jumlahMenu;
 	public Long getId() {
 		return id;
 	}
@@ -29,11 +31,23 @@ public class DetailPembayaran extends AuditModel{
 	public void setTransaksiId(Long transaksiId) {
 		this.transaksiId = transaksiId;
 	}
-	public Long getMenuId() {
-		return menuId;
+	public Long getJumlahMenu() {
+		return jumlahMenu;
 	}
-	public void setMenuId(Long menuId) {
-		this.menuId = menuId;
+	public void setJumlahMenu(Long jumlahMenu) {
+		this.jumlahMenu = jumlahMenu;
+	}
+	public String getNamaMenu() {
+		return namaMenu;
+	}
+	public void setNamaMenu(String namaMenu) {
+		this.namaMenu = namaMenu;
+	}
+	public Long getHargaMenu() {
+		return hargaMenu;
+	}
+	public void setHargaMenu(Long hargaMenu) {
+		this.hargaMenu = hargaMenu;
 	}
 	
 }

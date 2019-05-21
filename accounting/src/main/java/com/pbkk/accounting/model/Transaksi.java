@@ -17,56 +17,42 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "transaksi")
 public class Transaksi extends AuditModel{
 	@Id
-	private Long transaksi_id;
-	
-	@NotNull
-	private Date date;
-	
-	@NotNull
-	private Time time;
+	private Long transaksiId;
 	
 	@NotNull
 	@Size(max = 20)
 	private String transaksiStatus;
 	
-	@NotNull
-	@Size(max = 20)
-	private String jenis_pembayaran;
+	private Long restaurantId;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Restaurant restaurant;
+	private Long customerId;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Customer customer;
+	private String kodePromo;
+	
+	private Long potongan;
 
-	public Long getTransaksi_id() {
-		return transaksi_id;
+	public String getKodePromo() {
+		return kodePromo;
 	}
 
-	public void setTransaksi_id(Long transaksi_id) {
-		this.transaksi_id = transaksi_id;
+	public void setKodePromo(String kodePromo) {
+		this.kodePromo = kodePromo;
 	}
 
-	public Date getDate() {
-		return date;
+	public Long getPotongan() {
+		return potongan;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setPotongan(Long potongan) {
+		this.potongan = potongan;
 	}
 
-	public Time getTime() {
-		return time;
+	public Long getTransaksiId() {
+		return transaksiId;
 	}
 
-	public void setTime(Time time) {
-		this.time = time;
+	public void setTransaksiId(Long transaksiId) {
+		this.transaksiId = transaksiId;
 	}
 
 	public String getTransaksiStatus() {
@@ -77,28 +63,23 @@ public class Transaksi extends AuditModel{
 		this.transaksiStatus = transaksiStatus;
 	}
 
-	public String getJenis_pembayaran() {
-		return jenis_pembayaran;
+	public Long getRestaurantId() {
+		return restaurantId;
 	}
 
-	public void setJenis_pembayaran(String jenis_pembayaran) {
-		this.jenis_pembayaran = jenis_pembayaran;
+	public void setRestaurantId(Long restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
+	
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 
 }
