@@ -45,7 +45,10 @@
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /cashflow | receiptDetail | - |{
+|POST| /cashflow | receiptDetail | - ||
+
+Format receiptDetail:
+{
     "transaksi":{
         "transaksiId": ,
         "transaksiStatus": ,
@@ -66,7 +69,7 @@
         "jumlahMenu":
         }
     ]
-}|
+}
 
 **Delivery**
 ---
