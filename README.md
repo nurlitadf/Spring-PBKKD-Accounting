@@ -17,30 +17,31 @@
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|GET| /receipt | - |  | Get all receipt. |
-|GET| /receipt | customer | - ||
-|GET| /receipt | customer, dateStart, dateEnd | - ||
-|GET| /receipt | restaurant | - ||
-|GET| /receipt | restaurant, dateStart, dateEnd| - ||
-|GET| /receipt | customer, restaurant | - ||
-|GET| /receipt | driver | - ||
-|GET| /receipt | driver, dateStart, dateEnd| - ||
-|GET| /cashflow | customer | - ||
-|GET| /cashflow | customer, dateStart, dateEnd | - ||
-|GET| /cashflow | restaurant | - ||
-|GET| /cashflow | restaurant, dateStart, dateEnd| - ||
-|GET| /cashflow | customer, restaurant | - ||
-|GET| /cashflow | driver | - ||
-|GET| /cashflow | driver, dateStart, dateEnd| - ||
+|GET| /receipt | - | User | Get all receipt. |
+|GET| /receipt/{id} | - | User | Get receipt by id. |
+|GET| /receipt | customerId, dateStart, dateEnd | User ||
+|GET| /receipt | restaurant, dateStart, dateEnd| User ||
+|GET| /receipt | driver, dateStart, dateEnd| User ||
+|GET| /cashflow | customer | User ||
+|GET| /cashflow | customer, dateStart, dateEnd | User ||
+|GET| /cashflow | restaurant | User ||
+|GET| /cashflow | restaurant, dateStart, dateEnd| User ||
+|GET| /cashflow | customer, restaurant | User ||
+|GET| /cashflow | driver | User ||
+|GET| /cashflow | driver, dateStart, dateEnd| User ||
+|GET| /delivery | | User ||
+|GET| /delivery/{driverId} |  | User ||
+|GET| /delivery/{driverId} | dateStart, dateEnd | User ||
 
 **Order**
 ---
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /receipt/create | receiptDetail | - ||
+|POST| /receipt/create | receiptDetail | User ||
 
 Format receiptDetail:
+```
 {  
     "transaksi":{  
         "transaksiId": ,  
@@ -63,17 +64,17 @@ Format receiptDetail:
         }  
     ]  
 }  
-
+```
 **Payment**
 ---
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /cashflow | receiptDetail | - ||
+|POST| /cashflow | id, source, sourceId, destination, destinationId, jumlahUang | User ||
 
 **Delivery**
 ---
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /delivery/create | id, driverId, transaksiId, ongkir | - ||
+|POST| /delivery/create | id, driverId, transaksiId, ongkir | User ||
