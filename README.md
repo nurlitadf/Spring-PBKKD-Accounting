@@ -38,7 +38,31 @@
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /receipt | resto_id, menu_detail, customer_id, promo_kode, potongan, harga_total | - ||
+|POST| /receipt/create | receiptDetail | - ||
+
+Format receiptDetail:
+{  
+    "transaksi":{  
+        "transaksiId": ,  
+        "transaksiStatus": ,  
+        "restaurantId": ,  
+        "customerId":   
+    },  
+    "detailPembayaran":[  
+        {  
+        "transaksiId": ,  
+        "namaMenu": ,  
+        "hargaMenu": ,  
+        "jumlahMenu":  
+        },  
+        {  
+        "transaksiId": ,  
+        "namaMenu": ,  
+        "hargaMenu": ,  
+        "jumlahMenu":  
+        }  
+    ]  
+}  
 
 **Payment**
 ---
@@ -46,30 +70,6 @@
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 |POST| /cashflow | receiptDetail | - ||
-
-Format receiptDetail:
-{
-    "transaksi":{
-        "transaksiId": ,
-        "transaksiStatus": ,
-        "restaurantId": ,
-        "customerId": 
-    },
-    "detailPembayaran":[
-        {
-        "transaksiId": ,
-        "namaMenu": ,
-        "hargaMenu": ,
-        "jumlahMenu":
-        },
-        {
-        "transaksiId": ,
-        "namaMenu": ,
-        "hargaMenu": ,
-        "jumlahMenu":
-        }
-    ]
-}
 
 **Delivery**
 ---
