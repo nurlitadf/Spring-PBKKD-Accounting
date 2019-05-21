@@ -38,11 +38,39 @@
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /order | resto_id, menu_detail, customer_id, promo_kode, potongan, harga_total | - ||
+|POST| /receipt | resto_id, menu_detail, customer_id, promo_kode, potongan, harga_total | - ||
 
 **Payment**
 ---
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /transact | src_role, src_id, dst_role, dst_id, total | - ||
+|POST| /cashflow | receiptDetail | - |{
+    "transaksi":{
+        "transaksiId": ,
+        "transaksiStatus": ,
+        "restaurantId": ,
+        "customerId": 
+    },
+    "detailPembayaran":[
+        {
+        "transaksiId": ,
+        "namaMenu": ,
+        "hargaMenu": ,
+        "jumlahMenu":
+        },
+        {
+        "transaksiId": ,
+        "namaMenu": ,
+        "hargaMenu": ,
+        "jumlahMenu":
+        }
+    ]
+}|
+
+**Delivery**
+---
+
+| Method | End Point | Parameter | Privilege | Description |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+|POST| /delivery/create | id, driverId, transaksiId, ongkir | - ||
