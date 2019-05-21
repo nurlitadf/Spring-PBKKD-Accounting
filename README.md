@@ -70,7 +70,7 @@ Format receiptDetail:
 
 | Method | End Point | Parameter | Privilege | Description |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-|POST| /cashflow | id, source, sourceId, destination, destinationId, jumlahUang | User ||
+|POST| /cashflow/create | id, source, sourceId, destination, destinationId, jumlahUang | User ||
 
 **Delivery**
 ---
