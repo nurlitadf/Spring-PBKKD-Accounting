@@ -11,9 +11,10 @@
 	<ul>
 		<li><a href="getReceipt.html">Get Receipt</a></li>
 		<li><a href="getCashflow.html">Get Cashflow</a></li>
+    <li><a href="getDelivery.html">Get Delivery</a></li><!-- 
 		<li><a href="postOrder.html">Post Order</a></li>
 		<li><a href="postDelivery.html">Post Delivery</a></li>
-		<li><a href="postPayment.html">Post Payment</a></li>
+		<li><a href="postPayment.html">Post Payment</a></li> -->
 	</ul>
 <div id="root"></div>
 <script type="text/javascript">
@@ -36,24 +37,40 @@ app.appendChild(container)
      data.forEach(receipt => {
       const card = document.createElement('div')
       card.setAttribute('class', 'card')
-     
+      
       const nama_restoran = document.createElement('p')
-      nama_restoran.textContent = `${receipt.nama_restoran}`
+      nama_restoran.textContent = `Nama Restoran : ${receipt.nama_restoran}`
       const nama_pelanggan = document.createElement('p')
-      nama_pelanggan.textContent = `${receipt.nama_pelanggan}`
+      nama_pelanggan.textContent = `Nama Pelanggan : ${receipt.nama_pelanggan}`
       const id_transaksi = document.createElement('p')
-      id_transaksi.textContent = `${receipt.id_transaksi}`
-      const date = document.createElement('p')
-      date.textContent = `${receipt.date}`
-      const ongkos_kirim = document.createElement('p')
-      ongkos_kirim.textContent = `${receipt.ongkos_kirim}`
-      const total_harga = document.createElement('p')
-      total_harga.textContent = `${receipt.total_harga}`
-
-      container.appendChild(card)
+      id_transaksi.textContent = `id transaksi : ${receipt.id_transaksi}`
+       container.appendChild(card)
       card.appendChild(nama_restoran)
       card.appendChild(nama_pelanggan)
       card.appendChild(id_transaksi)
+      receipt["detail_pembelian"].forEach(detil =>{
+        const nama_menu = document.createElement('p')
+        nama_menu.textContent = `nama menu : ${detil.nama_menu}`
+        const jumlah_beli = document.createElement('p')
+        jumlah_beli.textContent = `jumlah pembelian : ${detil.jumlah_beli}`
+        const harga_satuan = document.createElement('p')
+        harga_satuan.textContent = `harga satuan : ${detil.harga_satuan}`
+        const harga_total = document.createElement('p')
+        harga_total.textContent = `harga total : ${detil.harga_total}`
+        card.appendChild(nama_menu)
+      card.appendChild(jumlah_beli)
+      card.appendChild(harga_satuan)
+      card.appendChild(harga_total)
+      })
+      const date = document.createElement('p')
+      date.textContent = `Tanggal dan Jam : ${receipt.date}`
+      const ongkos_kirim = document.createElement('p')
+      ongkos_kirim.textContent = `Ongkos Kirim : ${receipt.ongkos_kirim}`
+      const total_harga = document.createElement('p')
+      total_harga.textContent = `Harga total : ${receipt.total_harga}`
+
+     
+
       card.appendChild(date)
       card.appendChild(ongkos_kirim)
       card.appendChild(total_harga)

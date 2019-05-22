@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <ul>
+    <li><a href="getReceipt.html">Get Receipt</a></li>
+    <li><a href="getCashflow.html">Get Cashflow</a></li>
+     <li><a href="getDelivery.html">Get Delivery</a></li><!-- 
+    <li><a href="postOrder.html">Post Order</a></li>
+    <li><a href="postDelivery.html">Post Delivery</a></li>
+    <li><a href="postPayment.html">Post Payment</a></li> -->
+  </ul>
+<div id="root"></div>
+<script type="text/javascript">
+
+  const app = document.getElementById('root')
+const container = document.createElement('div')
+container.setAttribute('class', 'container')
+
+app.appendChild(container)
+
+  var request = new XMLHttpRequest()
+
+  request.open('GET', 'https://pbkk-accounting.azurewebsites.net/delivery', true)
+  request.setRequestHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJyb2xlIjoiQ3VzdG9tZXIiLCJwaG9uZSI6IjA4MjE0MDQ4OTA2OCIsImlzcyI6InRjZGVsaXZlcnkiLCJuYW1lIjoiTnVybGl0YSIsImV4cCI6MTU1ODQ5MjYwNSwidXNlcmlkIjoyMDMsImVtYWlsIjoibnVybGl0YWRmMTdAZ21haWwuY29tIiwidXNlcm5hbWUiOiJudXJsaXRhZGYifQ.iLAwuNUudhVXjP1eBXyFRCcZ4Y6_by7kKc2DrPk3oXjVSayHlK-wNa22KXwUIDQ7snuyowbs9H4d1jmVRj5ScNEVoOTU99qBJlXFSVfvi0VgxBXz2IBm6cfxX9CAfbi53Upq_dNYveTP978FRtX0E5zT9Myc5NP_emHUxTYocnj-CUq32ci1_D8wEtxdpwJUjR9OAEg6sN9bxYVPSFaFy5TmlzRPuAKP_vsv9CCV9R0NJFF8czXXymoNrRP6x8c2p5cjupiuRGekkHUwxYGNkbdUCyLOAufNaZCw_PBoqrVbrF4h0YpH7Hrn4aGwoFW_5gxbDKhQ_z4SoWFDTBb352-mketOvUwulmhAAsnUDUmQlg7XEh2KEXinIUrFnccTcJuHuuS7D6o8VuRErfUEiEz0of_QiHaQV_BgawyVKIX2yRnqRHFX9FkZjvQRHWFBZXJYrzAmHuvcSgaoVnAa2tmt9uPd4iSgEMuBUcdCnhP4YCWprkEFscBZCT9Xgf_A0OR2QbnAkRkg5d-8kyMxOzB8MGNy5gZFOcQZ-kTstb3BqgH7kyyfbFK73hOl4FcmBtVa4hVjWrbY1jsCiC5m0aDB6Ka3xTZE10wHB96WlYAz6xmwuL2e1HHmVpUj-5FCLJOF0ldfGWXYziqdywAXcqyQ6oiEJ3_5RYXzXhqMa58")
+  request.onload = function() {
+  // Begin accessing JSON data here
+  var data = JSON.parse(this.response)
+  console.log(request.status)
+  if (request.status >= 200 && request.status < 400) {
+   
+     data.forEach(deliv => {
+      const card = document.createElement('div')
+      card.setAttribute('class', 'card')
+       const nama_driver = document.createElement('p')
+      nama_driver.textContent = `Nama Driver : ${deliv.nama_driver}`
+      card.appendChild(nama_driver)
+        const nama_restoran = document.createElement('p')
+      nama_restoran.textContent = `Nama Restoran : ${deliv.receipt.nama_restoran}`
+      const nama_pelanggan = document.createElement('p')
+      nama_pelanggan.textContent = `Nama Pelanggan : ${deliv.receipt.nama_pelanggan}`
+      const id_transaksi = document.createElement('p')
+      id_transaksi.textContent = `id transaksi : ${deliv.receipt.id_transaksi}`
+       container.appendChild(card)
+      card.appendChild(nama_restoran)
+      card.appendChild(nama_pelanggan)
+      card.appendChild(id_transaksi)
+      deliv.receipt["detail_pembelian"].forEach(detil =>{
+        const nama_menu = document.createElement('p')
+        nama_menu.textContent = `nama menu : ${detil.nama_menu}`
+        const jumlah_beli = document.createElement('p')
+        jumlah_beli.textContent = `jumlah pembelian : ${detil.jumlah_beli}`
+        const harga_satuan = document.createElement('p')
+        harga_satuan.textContent = `harga satuan : ${detil.harga_satuan}`
+        const harga_total = document.createElement('p')
+        harga_total.textContent = `harga total : ${detil.harga_total}`
+        card.appendChild(nama_menu)
+      card.appendChild(jumlah_beli)
+      card.appendChild(harga_satuan)
+      card.appendChild(harga_total)
+
+      const date = document.createElement('p')
+      date.textContent = `Tanggal dan Jam : ${deliv.receipt.date}`
+      const ongkos_kirim = document.createElement('p')
+      ongkos_kirim.textContent = `Ongkos Kirim : ${deliv.receipt.ongkos_kirim}`
+      const total_harga = document.createElement('p')
+      total_harga.textContent = `Harga total : ${deliv.receipt.total_harga}`
+      card.appendChild(date)
+      card.appendChild(ongkos_kirim)
+      card.appendChild(total_harga)
+      })
+      
+
+     
+
+      
+    })
+  } else {
+    const errorMessage = document.createElement('p')
+    errorMessage.textContent = `error`
+    app.appendChild(errorMessage)
+  }
+}
+
+request.send()
+
+</script>
+
+</body>
+</html>
