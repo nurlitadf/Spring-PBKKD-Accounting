@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title></title>
+	<link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+	<ul>
+		<li><a href="getReceipt.html">Get Receipt</a></li>
+		<li><a href="getCashflow.html">Get Cashflow</a></li>
+		<li><a href="postOrder.html">Post Order</a></li>
+		<li><a href="postDelivery.html">Post Delivery</a></li>
+		<li><a href="postPayment.html">Post Payment</a></li>
+	</ul>
+<div id="root"></div>
+<script type="text/javascript">
+
+	const app = document.getElementById('root')
+const container = document.createElement('div')
+container.setAttribute('class', 'container')
+
+app.appendChild(container)
+
+	var request = new XMLHttpRequest()
+
+	request.open('GET', 'https://pbkk-accounting.azurewebsites.net/receipt', true)
+	request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJyb2xlIjoiQ3VzdG9tZXIiLCJwaG9uZSI6IjA4MjE0MDQ4OTA2OCIsImlzcyI6InRjZGVsaXZlcnkiLCJuYW1lIjoiTnVybGl0YSIsImV4cCI6MTU1ODQ3MTY4MSwidXNlcmlkIjoyMDMsImVtYWlsIjoibnVybGl0YWRmMTdAZ21haWwuY29tIiwidXNlcm5hbWUiOiJudXJsaXRhZGYifQ.iMQpic_C9DDq-4gRVmcQkGCdElHmRSbkgyayAgkwpR1ELPJ8Jm_f15lmfl7una6-lul0PL2hjNYU-Btgl02xveCua_AfjYSIyQp02LZ2OMtoOSnANs8WZLostX0bwg40DV9vQcUk5AkT18_7us1nIytXEkgV8RVpgf62DJ4ccxUwK1lSA8UYL5jw3k1oUds0tB1a5JzXdMbXVkTmWvg-fX3UCcAkadbird54O0WoioQ5f65d-kSN0FTpMjn5X9O3s3shqYtKvf9wFO6mcC_GRqL2hLdyHMbmkdeV2F75vIcNKDZf6d7_tuE9YL26LQZ5PR87Yf3I_DDRhXuM8RbF8pO3GfYM68oj2F_j2PZ-DtgdQOJl-OteuW3J-nz1GRUAzZ64tjCSYuI6bp0tJjOaXTON063ahXv2Rk4UR0YcVVVZCnzFn6EAvnRVi_CbspLUNzlUC60wcAZKi2e5L9N_QTXwQj3FsXH6_nKGlDMNEO7Bk5LejWmQwZMWozsaeVozV8wITEG38c7tJ41uFFQ3-vu4JF5i_riIyU83NhsT7lgKJPWwE3xgzJYgyNC75XjizHK01r1LyMUN8nEwIS7LQsyH9vTSrOg0a0e8dgD2fBP1Vj1YBGs8QoLW3Y_z4ujKTiX33WC_JJjWqxVW_HsU-SCTbS173C7WhC1gsxUWZuI")
+	request.onload = function() {
+  // Begin accessing JSON data here
+  var data = JSON.parse(this.response)
+  console.log(request.status)
+  if (request.status >= 200 && request.status < 400) {
+    data.forEach(receipt => {
+      const card = document.createElement('div')
+      card.setAttribute('class', 'card')
+      const h1 = document.createElement('h1')
+      h1.textContent = `${receipt.nama_restoran}`
+
+      const p = document.createElement('p')
+      p.textContent = `${receipt.nama_pelanggan}`
+
+      container.appendChild(card)
+      card.appendChild(h1)
+      card.appendChild(p)
+    })
+  } else {
+    const errorMessage = document.createElement('marquee')
+    errorMessage.textContent = `Gah, it's not working!`
+    app.appendChild(errorMessage)
+  }
+}
+
+request.send()
+
+</script>
+
+</body>
+</html>
