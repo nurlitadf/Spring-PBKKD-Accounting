@@ -84,31 +84,34 @@ public class CashflowServiceImpl implements CashflowService{
 		String destination=cashflow.getDestination();
 		Long destinationId=cashflow.getDestinationId();
 		Long jumlahUang=cashflow.getJumlahUang();
+		Date date=cashflow.getCreatedAt();
 		String token=sendAPI.getToken();
 		Map<String,Object> data = new LinkedHashMap();
-		if(source=="customer") {
+		data.put("id",cashflow.getId());
+		data.put("date", date);
+		if(source.equals("customer")) {
 			Customers customer=sendAPI.getCustomerData(sourceId, token);
 			data.put("from", customer.getName());
 		}
-		if(source=="restaurant") {
+		if(source.equals("restaurant")) {
 			Restaurants restaurant=sendAPI.getRestaurantData(sourceId, token);
 			data.put("from", restaurant.getName());
 		}
-		if(source=="driver") {
+		if(source.equals("driver")) {
 			Drivers driver=sendAPI.getDriverData(sourceId, token);
 			data.put("from", driver.getName());
 		}
-		if(destination=="customer") {
+		if(destination.equals("customer")) {
 			Customers customer=sendAPI.getCustomerData(destinationId, token);
-			data.put("from", customer.getName());
+			data.put("to", customer.getName());
 		}
-		if(destination=="restaurant") {
+		if(destination.equals("restaurant")) {
 			Restaurants restaurant=sendAPI.getRestaurantData(destinationId, token);
-			data.put("from", restaurant.getName());
+			data.put("to", restaurant.getName());
 		}
-		if(destination=="driver") {
+		if(destination.equals("driver")) {
 			Drivers driver=sendAPI.getDriverData(destinationId, token);
-			data.put("from", driver.getName());
+			data.put("to", driver.getName());
 		}
 		data.put("jumlah_uang",jumlahUang);
 		return data;
