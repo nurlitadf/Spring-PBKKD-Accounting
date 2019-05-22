@@ -33,18 +33,30 @@ app.appendChild(container)
   var data = JSON.parse(this.response)
   console.log(request.status)
   if (request.status >= 200 && request.status < 400) {
-    data.forEach(receipt => {
+      data.forEach(receipt => {
       const card = document.createElement('div')
       card.setAttribute('class', 'card')
-      const h1 = document.createElement('h1')
-      h1.textContent = `${receipt.nama_restoran}`
-
-      const p = document.createElement('p')
-      p.textContent = `${receipt.nama_pelanggan}`
+     
+      const nama_restoran = document.createElement('p')
+      nama_restoran.textContent = `${receipt.nama_restoran}`
+      const nama_pelanggan = document.createElement('p')
+      nama_pelanggan.textContent = `${receipt.nama_pelanggan}`
+      const id_transaksi = document.createElement('p')
+      id_transaksi.textContent = `${receipt.id_transaksi}`
+      const date = document.createElement('p')
+      date.textContent = `${receipt.date}`
+      const ongkos_kirim = document.createElement('p')
+      ongkos_kirim.textContent = `${receipt.ongkos_kirim}`
+      const total_harga = document.createElement('p')
+      total_harga.textContent = `${receipt.total_harga}`
 
       container.appendChild(card)
-      card.appendChild(h1)
-      card.appendChild(p)
+      card.appendChild(nama_restoran)
+      card.appendChild(nama_pelanggan)
+      card.appendChild(id_transaksi)
+      card.appendChild(date)
+      card.appendChild(ongkos_kirim)
+      card.appendChild(total_harga)
     })
   } else {
     const errorMessage = document.createElement('marquee')

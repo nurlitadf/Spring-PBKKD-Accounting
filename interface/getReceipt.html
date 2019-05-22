@@ -27,28 +27,40 @@ app.appendChild(container)
 	var request = new XMLHttpRequest()
 
 	request.open('GET', 'https://pbkk-accounting.azurewebsites.net/receipt', true)
-	request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJyb2xlIjoiQ3VzdG9tZXIiLCJwaG9uZSI6IjA4MjE0MDQ4OTA2OCIsImlzcyI6InRjZGVsaXZlcnkiLCJuYW1lIjoiTnVybGl0YSIsImV4cCI6MTU1ODQ3MTY4MSwidXNlcmlkIjoyMDMsImVtYWlsIjoibnVybGl0YWRmMTdAZ21haWwuY29tIiwidXNlcm5hbWUiOiJudXJsaXRhZGYifQ.iMQpic_C9DDq-4gRVmcQkGCdElHmRSbkgyayAgkwpR1ELPJ8Jm_f15lmfl7una6-lul0PL2hjNYU-Btgl02xveCua_AfjYSIyQp02LZ2OMtoOSnANs8WZLostX0bwg40DV9vQcUk5AkT18_7us1nIytXEkgV8RVpgf62DJ4ccxUwK1lSA8UYL5jw3k1oUds0tB1a5JzXdMbXVkTmWvg-fX3UCcAkadbird54O0WoioQ5f65d-kSN0FTpMjn5X9O3s3shqYtKvf9wFO6mcC_GRqL2hLdyHMbmkdeV2F75vIcNKDZf6d7_tuE9YL26LQZ5PR87Yf3I_DDRhXuM8RbF8pO3GfYM68oj2F_j2PZ-DtgdQOJl-OteuW3J-nz1GRUAzZ64tjCSYuI6bp0tJjOaXTON063ahXv2Rk4UR0YcVVVZCnzFn6EAvnRVi_CbspLUNzlUC60wcAZKi2e5L9N_QTXwQj3FsXH6_nKGlDMNEO7Bk5LejWmQwZMWozsaeVozV8wITEG38c7tJ41uFFQ3-vu4JF5i_riIyU83NhsT7lgKJPWwE3xgzJYgyNC75XjizHK01r1LyMUN8nEwIS7LQsyH9vTSrOg0a0e8dgD2fBP1Vj1YBGs8QoLW3Y_z4ujKTiX33WC_JJjWqxVW_HsU-SCTbS173C7WhC1gsxUWZuI")
+	request.setRequestHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJyb2xlIjoiQ3VzdG9tZXIiLCJwaG9uZSI6IjA4MjE0MDQ4OTA2OCIsImlzcyI6InRjZGVsaXZlcnkiLCJuYW1lIjoiTnVybGl0YSIsImV4cCI6MTU1ODQ5MjYwNSwidXNlcmlkIjoyMDMsImVtYWlsIjoibnVybGl0YWRmMTdAZ21haWwuY29tIiwidXNlcm5hbWUiOiJudXJsaXRhZGYifQ.iLAwuNUudhVXjP1eBXyFRCcZ4Y6_by7kKc2DrPk3oXjVSayHlK-wNa22KXwUIDQ7snuyowbs9H4d1jmVRj5ScNEVoOTU99qBJlXFSVfvi0VgxBXz2IBm6cfxX9CAfbi53Upq_dNYveTP978FRtX0E5zT9Myc5NP_emHUxTYocnj-CUq32ci1_D8wEtxdpwJUjR9OAEg6sN9bxYVPSFaFy5TmlzRPuAKP_vsv9CCV9R0NJFF8czXXymoNrRP6x8c2p5cjupiuRGekkHUwxYGNkbdUCyLOAufNaZCw_PBoqrVbrF4h0YpH7Hrn4aGwoFW_5gxbDKhQ_z4SoWFDTBb352-mketOvUwulmhAAsnUDUmQlg7XEh2KEXinIUrFnccTcJuHuuS7D6o8VuRErfUEiEz0of_QiHaQV_BgawyVKIX2yRnqRHFX9FkZjvQRHWFBZXJYrzAmHuvcSgaoVnAa2tmt9uPd4iSgEMuBUcdCnhP4YCWprkEFscBZCT9Xgf_A0OR2QbnAkRkg5d-8kyMxOzB8MGNy5gZFOcQZ-kTstb3BqgH7kyyfbFK73hOl4FcmBtVa4hVjWrbY1jsCiC5m0aDB6Ka3xTZE10wHB96WlYAz6xmwuL2e1HHmVpUj-5FCLJOF0ldfGWXYziqdywAXcqyQ6oiEJ3_5RYXzXhqMa58")
 	request.onload = function() {
   // Begin accessing JSON data here
   var data = JSON.parse(this.response)
   console.log(request.status)
   if (request.status >= 200 && request.status < 400) {
-    data.forEach(receipt => {
+     data.forEach(receipt => {
       const card = document.createElement('div')
       card.setAttribute('class', 'card')
-      const h1 = document.createElement('h1')
-      h1.textContent = `${receipt.nama_restoran}`
-
-      const p = document.createElement('p')
-      p.textContent = `${receipt.nama_pelanggan}`
+     
+      const nama_restoran = document.createElement('p')
+      nama_restoran.textContent = `${receipt.nama_restoran}`
+      const nama_pelanggan = document.createElement('p')
+      nama_pelanggan.textContent = `${receipt.nama_pelanggan}`
+      const id_transaksi = document.createElement('p')
+      id_transaksi.textContent = `${receipt.id_transaksi}`
+      const date = document.createElement('p')
+      date.textContent = `${receipt.date}`
+      const ongkos_kirim = document.createElement('p')
+      ongkos_kirim.textContent = `${receipt.ongkos_kirim}`
+      const total_harga = document.createElement('p')
+      total_harga.textContent = `${receipt.total_harga}`
 
       container.appendChild(card)
-      card.appendChild(h1)
-      card.appendChild(p)
+      card.appendChild(nama_restoran)
+      card.appendChild(nama_pelanggan)
+      card.appendChild(id_transaksi)
+      card.appendChild(date)
+      card.appendChild(ongkos_kirim)
+      card.appendChild(total_harga)
     })
   } else {
-    const errorMessage = document.createElement('marquee')
-    errorMessage.textContent = `Gah, it's not working!`
+    const errorMessage = document.createElement('p')
+    errorMessage.textContent = `error`
     app.appendChild(errorMessage)
   }
 }
